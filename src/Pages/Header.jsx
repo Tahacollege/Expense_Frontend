@@ -1,29 +1,31 @@
 import logo from "../assets/burhani_logo.jpg"
 import { useNavigate } from "react-router-dom"
-function redirect(id){
-    const navigate = useNavigate();
-    if(id==0){
-        navigate("/");
-        // window.location.href="/"
-    }
-    else if(id==1){
-        navigate("/credit");
-        // window.location.href="/credit"
-    }
-    else if(id==2){
-        navigate("/debit");
-        // window.location.href="/debit"
-    }
-    else if(id==3){
-        navigate("/roll");
-        // window.location.href="/roll"
-    }
-    else if(id==4){
-        navigate("/previous");
-        // window.location.href="/previous"
-    }
-}
+
 function Header(){
+    const navigate = useNavigate();
+    function redirect(id){
+        
+        if(id==0){
+            navigate("/");
+            // window.location.href="/"
+        }
+        else if(id==1){
+            // navigate("/credit");
+            window.location.href="/credit"
+        }
+        else if(id==2){
+            navigate("/debit");
+            // window.location.href="/debit"
+        }
+        else if(id==3){
+            navigate("/roll");
+            // window.location.href="/roll"
+        }
+        else if(id==4){
+            navigate("/previous");
+            // window.location.href="/previous"
+        }
+    }
     return (
         <div className="bg-slate-200 w-full h-24 flex ">
             <img 
