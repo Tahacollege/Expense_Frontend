@@ -56,7 +56,7 @@ function Credit(){
         const res=await updateCreditdata(form)
         if(res=='Successfully Updated'){
             window.localStorage.setItem('dataStored','true')
-            navigate(0)
+            navigate("/")
           }
           else{
             toast.error(`Error occurred try again`, {
@@ -69,7 +69,7 @@ function Credit(){
         const res=await Insertdata(form)
       if(res=='Successfully inserted'){
         window.localStorage.setItem('dataStored','true')
-        navigate(0)
+        navigate("/")
       }
       else{
         toast.error(`Error occurred try again`, {
@@ -90,7 +90,7 @@ function Credit(){
     };
     async function deleteobj(id){
       const del=await Delete_Credit_data_By_Id(id)
-      navigate(0)
+      navigate("/")
     }
     async function editobj(id){
       const data=await Get_Credit_data_By_Id(id)
