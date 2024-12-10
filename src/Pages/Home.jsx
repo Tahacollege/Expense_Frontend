@@ -37,21 +37,21 @@ function Home(){
         return 0
       }
       else{
-//  if('debit' in item){
-//           d-=item.amount
-//         }
-//         else{
-//           d+=item.amount
-//         }
-if (item && typeof item === 'object') {
-  if ('debit' in item) {
-    d -= item.amount;
-  } else {
-    d += item.amount;
-  }
-} else {
-  console.error("Invalid item:", item);
-}
+ if('debit' in item){
+          d-=item.amount
+        }
+        else{
+          d+=item.amount
+        }
+// if (item && typeof item === 'object') {
+//   if ('debit' in item) {
+//     d -= item.amount;
+//   } else {
+//     d += item.amount;
+//   }
+// } else {
+//   console.error("Invalid item:", item);
+// }
       }
        
         console.log(d)
