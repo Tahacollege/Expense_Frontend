@@ -33,6 +33,7 @@ function Home(){
   };
     const calc=(item)=>{
       // var d=0;
+      console.log(item)
       if(item==undefined){
         return 0
       }
