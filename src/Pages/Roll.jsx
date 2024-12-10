@@ -56,7 +56,7 @@ function Roll(){
       const res=await updateRolldata(form)
       if(res=='Successfully Updated'){
           window.localStorage.setItem('dataStored','true')
-          navigate('/roll')
+          navigate(0)
         }
         else{
           toast.error(`Error occurred try again`, {
@@ -70,7 +70,7 @@ function Roll(){
       const res=await Rolldata(form)
       if(res=='Successfully inserted'){
         window.localStorage.setItem('dataStored','true')
-        navigate('/roll')
+        navigate(0)
       }
       else{
         toast.error(`Error occurred try again`, {
@@ -91,7 +91,7 @@ function Roll(){
     };
     async function deleteobj(id){
       const del=await Delete_Roll_data_By_Id(id)
-      navigate('/roll')
+      navigate(0)
     }
     async function editobj(id){
       const data=await Get_Roll_data_By_Id(id)
