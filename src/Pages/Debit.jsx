@@ -69,7 +69,7 @@ function Debit(){
         const res=await Debitdata(form)
       if(res=='Successfully inserted'){
         window.localStorage.setItem('dataStored','true')
-        window.location.reload()
+        navigate('/debit')
       }
       else{
         toast.error(`Error occurred try again`, {

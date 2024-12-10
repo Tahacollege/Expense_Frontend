@@ -69,7 +69,7 @@ function Credit(){
         const res=await Insertdata(form)
       if(res=='Successfully inserted'){
         window.localStorage.setItem('dataStored','true')
-        window.location.reload()
+        navigate('/credit')
       }
       else{
         toast.error(`Error occurred try again`, {

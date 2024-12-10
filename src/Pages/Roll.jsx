@@ -56,7 +56,7 @@ function Roll(){
       const res=await updateRolldata(form)
       if(res=='Successfully Updated'){
           window.localStorage.setItem('dataStored','true')
-          window.location.reload()
+          navigate('/roll')
         }
         else{
           toast.error(`Error occurred try again`, {
