@@ -5,7 +5,9 @@ import { RiPencilFill } from "react-icons/ri";
 import "react-toastify/dist/ReactToastify.css";
 import { Rolldata,Get_Roll_data,Get_Roll_data_By_Id,updateRolldata,Delete_Roll_data_By_Id,Get_Roll_data_By_Date } from "../utils/Helper";
 import { toast, ToastContainer } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
 function Roll(){
+  const navigate=useNavigate()
   var date = new DateObject();
     const tdate=date.format('YYYY-MM-DD')
     console.log(tdate)
@@ -68,7 +70,7 @@ function Roll(){
       const res=await Rolldata(form)
       if(res=='Successfully inserted'){
         window.localStorage.setItem('dataStored','true')
-        window.location.reload()
+        navigate('/roll')
       }
       else{
         toast.error(`Error occurred try again`, {

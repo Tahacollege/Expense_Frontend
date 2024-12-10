@@ -10,8 +10,8 @@ function Header(){
             // window.location.href="/"
         }
         else if(id==1){
-            // navigate("/credit");
-            window.location.href="/credit"
+            navigate("/credit");
+            // window.location.href="/credit"
         }
         else if(id==2){
             navigate("/debit");

@@ -5,7 +5,10 @@ import { RiPencilFill } from "react-icons/ri";
 import { Insertdata,Get_Credit_data_By_Id,updateCreditdata,Delete_Credit_data_By_Id,Get_Credit_data_By_Date } from "../utils/Helper";
 import "react-toastify/dist/ReactToastify.css";
 import { toast, ToastContainer } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
+
 function Credit(){
+  const navigate=useNavigate()
   var date = new DateObject();
     const tdate=date.format('YYYY-MM-DD')
     console.log(tdate)
@@ -53,7 +56,7 @@ function Credit(){
         const res=await updateCreditdata(form)
         if(res=='Successfully Updated'){
             window.localStorage.setItem('dataStored','true')
-            window.location.reload()
+            navigate('/credit')
           }
           else{
             toast.error(`Error occurred try again`, {

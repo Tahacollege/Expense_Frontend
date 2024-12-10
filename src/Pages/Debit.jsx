@@ -5,7 +5,9 @@ import { RiPencilFill } from "react-icons/ri";
 import { Debitdata,Get_Debit_data_By_Id,updateDebitdata,Delete_Debit_data_By_Id,Get_Debit_data_By_Date } from "../utils/Helper";
 import "react-toastify/dist/ReactToastify.css";
 import { toast, ToastContainer } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
 function Debit(){
+  const navigate=useNavigate()
   var date = new DateObject();
     const tdate=date.format('YYYY-MM-DD')
     console.log(tdate)
@@ -54,7 +56,7 @@ function Debit(){
         const res=await updateDebitdata(form)
         if(res=='Successfully Updated'){
             window.localStorage.setItem('dataStored','true')
-            window.location.reload()
+            navigate('/debit')
           }
           else{
             toast.error(`Error occurred try again`, {
