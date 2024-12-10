@@ -145,7 +145,7 @@ function Credit(){
                 <td className="p-1 md:p-5 text-center border-b-4 border-slate-600">{item.quantity}</td>
                 <td className="p-1 md:p-5 text-center text-nowrap border-b-4 border-slate-600 text-green-500 font-bold">₹ {item.amount}</td>
                 
-                <td className="p-1 text-lg text-nowrap md:p-5 text-center border-b-4 border-slate-600">{formatDate(item.createdAt)}</td>
+                <td className="p-1 text-lg  md:p-5 text-center border-b-4 border-slate-600">{formatDate(item.createdAt)}</td>
                 <td className="border-b-4 border-slate-600">
                   <div className="block md:flex items-center space-y-2 p-0.5 justify-center gap-3">
                   <button className="bg-green-500 p-1 md:p-2 min-w-20 font-semibold text-white rounded-lg" onClick={()=>editobj(item._id)}>Edit</button>
