@@ -90,7 +90,7 @@ function Debit(){
     };
     async function deleteobj(id){
       const del=await Delete_Debit_data_By_Id(id)
-      window.location.reload()
+      navigate('/debit')
     }
     async function editobj(id){
       const data=await Get_Debit_data_By_Id(id)

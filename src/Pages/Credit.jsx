@@ -90,7 +90,7 @@ function Credit(){
     };
     async function deleteobj(id){
       const del=await Delete_Credit_data_By_Id(id)
-      window.location.reload()
+      navigate('/credit')
     }
     async function editobj(id){
       const data=await Get_Credit_data_By_Id(id)

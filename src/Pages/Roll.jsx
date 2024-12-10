@@ -91,7 +91,7 @@ function Roll(){
     };
     async function deleteobj(id){
       const del=await Delete_Roll_data_By_Id(id)
-      window.location.reload()
+      navigate('/roll')
     }
     async function editobj(id){
       const data=await Get_Roll_data_By_Id(id)
