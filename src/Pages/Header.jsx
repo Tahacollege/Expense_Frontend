@@ -1,19 +1,26 @@
 import logo from "../assets/burhani_logo.jpg"
+import { useNavigate } from "react-router-dom"
 function redirect(id){
+    const navigate = useNavigate();
     if(id==0){
-        window.location.href="/"
+        navigate("/");
+        // window.location.href="/"
     }
     else if(id==1){
-        window.location.href="/credit"
+        navigate("/credit");
+        // window.location.href="/credit"
     }
     else if(id==2){
-        window.location.href="/debit"
+        navigate("/debit");
+        // window.location.href="/debit"
     }
     else if(id==3){
-        window.location.href="/roll"
+        navigate("/roll");
+        // window.location.href="/roll"
     }
     else if(id==4){
-        window.location.href="/previous"
+        navigate("/previous");
+        // window.location.href="/previous"
     }
 }
 function Header(){
