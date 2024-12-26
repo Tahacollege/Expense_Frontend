@@ -7,22 +7,63 @@ function Prev_Trans(){
   var d=0
   const [dates,setDate]=useState([])
   const [sdata,setData]=useState([])
+  const [selectedDates, setSelectedDates] = useState({}); 
 
-  function getDatesOfCurrentMonth() {
-    const dates = [];
-    const now = new Date();
-    
-    const year = now.getFullYear();
-    const month = now.getMonth();
-    
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
-    
-    for (let day = 1; day <= daysInMonth; day++) {
-        dates.push(new Date(year, month, day).toISOString().split('T')[0]); 
+  function getMonthsOfYear() {
+    const months = [];
+    const now = new Date(); // Get the current date
+    const year = now.getFullYear(); // Optional: For reference, though not needed here
+
+    for (let month = 0; month < 12; month++) {
+        // Get the full name of the month using `toLocaleString`
+        const monthName = new Date(year, month, 1).toLocaleString('default', { month: 'long' });
+        months.push(monthName); // Add month name to the array
     }
-    setDate(dates)
-    return dates;
+
+    return months;
 }
+const months = getMonthsOfYear();
+
+const selectedMonth=async(e)=>{
+  e.preventDefault()
+  var setMonth=e.target.value
+  try {
+    const selectedMonth = setMonth; // Replace with user-selected month
+    const dates = getDatesForMonth(selectedMonth);
+    setDate(dates)
+    console.log(`Dates for ${selectedMonth}:`, dates);
+} catch (error) {
+    console.error(error.message);
+}
+
+}
+function getDatesForMonth(selectedMonth) {
+  const now = new Date();
+  const year = now.getFullYear(); // Current year
+  const months = [
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+  ];
+
+  const monthIndex = months.indexOf(selectedMonth); // Find the index of the selected month
+
+  if (monthIndex === -1) {
+      throw new Error("Invalid month name. Please provide a valid month.");
+  }
+
+  const dates = [];
+  const daysInMonth = new Date(year, monthIndex + 1, 0).getDate(); // Number of days in the month
+
+  for (let day = 1; day <= daysInMonth; day++) {
+      dates.push(new Date(year, monthIndex, day).toISOString().split('T')[0]); // Format as YYYY-MM-DD
+  }
+
+  return dates;
+}
+
+
+    
+
 const formatDate = (timestamp) => {
   const date = new Date(timestamp);
   return date.toLocaleString('en-US', {
@@ -50,8 +91,10 @@ if('debit' in item){
       // setAmount(d)
     
   }
+  
 useEffect(()=>{
-  getDatesOfCurrentMonth()
+  // getDatesOfYear()
+  // DatesDropdown()
 },[])
 
   const handelSubmit=async(e)=>{
@@ -67,42 +110,32 @@ useEffect(()=>{
   }
   var date = new DateObject();
     const tdate=date.format('YYYY-MM-DD')
-    const data=[
-        {
-        1:'BK12345',
-        2:'2023-07-10',
-        3:'2023-07-15',
-        4:'Deluxe',
-        5:'$500',
-      },
-      {
-        1:'BK12067',
-        2:'2022-12-20',
-        3:'2022-12-25',
-        4:'Suite',
-        5:'$750',
-      },
-      {
-        1:'BK11523',
-        2:'2022-05-15',
-        3:'2022-05-20',
-        4:'Standard',
-        5:'$400',
-      },
-    ]
+
+    
     return(
         <div className="p-1 md:p-10">
                 <h1 className="text-center font-semibold text-2xl mt-5">{date.format("dddd DD MMMM YYYY")}</h1>
                 <h1 className="text-center font-semibold text-2xl mt-5">Previous Transactions</h1>
                 <form className="mt-10" >
-                  <select className="border-2 w-full h-10 md:h-20 text-center text-3xl" name="crdate" onChange={handelSubmit}>
+                  <div className="flex w-full gap-5">
+                  <select className="border-2 w-1/2 h-10 md:h-20 text-center text-xl md:text-3xl" name="crdate" onChange={selectedMonth}>
+                    {months.map((item,index)=>{
+                      return (
+                        <option  value={item}>{item}</option>
+                      )
+                    })}
+                  </select>
+
+                  <select className="border-2 w-1/2 h-10 md:h-20 text-center text-xl md:text-3xl" name="crdate" onChange={handelSubmit}>
                     {dates.map((item,index)=>{
                       return (
                         <option  value={item}>{item}</option>
                       )
                     })}
                   </select>
-                  <table className="w-full mt-5">
+                  </div>
+
+                  <table className="w-full mt-10">
             <thead className="bg-[#3F5D97] text-white">
               <th className="p-1 md:p-5">Title</th>
               <th className="p-1 md:p-5">Quantity</th>

@@ -2,14 +2,16 @@ import axios from "axios"
 import DateObject from "react-date-object";
 import { toast, ToastContainer } from 'react-toastify';
 import { useState,useEffect } from "react";
-import { Get_Credit_data_By_Date,Get_Debit_data_By_Date,Get_Roll_data_By_Date } from "../utils/Helper";
+import { Get_Credit_data_By_Date,Get_Debit_data_By_Date,Get_Roll_data_By_Date,EstablishConnection } from "../utils/Helper";
+import { IoIosRefresh } from "react-icons/io";
 function Home(){
   var d=0
   var date = new DateObject();
     const tdate=date.format('YYYY-MM-DD')
-    console.log(tdate)
+    
     const [total,setTotal]=useState(0)
   const [sdata,setData]=useState([])
+  const [show,setShow]=useState(true)
   useEffect(()=>{
      const dataFetcher=async()=>{
       
@@ -33,7 +35,6 @@ function Home(){
   };
     const calc=(item)=>{
       // var d=0;
-      console.log(item)
       if(item==undefined){
         return 0
       }
@@ -55,16 +56,26 @@ function Home(){
 // }
       }
        
-        console.log(d)
         return d
         // setAmount(d)
       
     }
-    
+    const connectdb=async()=>{
+      const mssg=await EstablishConnection()
+      if(mssg=='Database connected Successfully'){
+        alert('Database Connected ')
+        setShow(false)
+      }
+      else{
+        alert('Try Again')
+        setShow(true)
+      }
+    }
     return(
         <div className="p-1 md:p-10">
           <ToastContainer/>
-                <h1 className="text-center font-semibold text-2xl mt-5">{date.format("dddd DD MMMM YYYY")}</h1>
+          <h1 className="text-center font-semibold text-2xl mt-5">{date.format("dddd DD MMMM YYYY")}</h1>
+          
                 <div className="mt-10">
                 <table className="w-full ">
             <thead className="bg-[#3F5D97] text-white">
@@ -104,7 +115,7 @@ function Home(){
               
             </tbody>
           </table>
-
+          { show?<button onClick={connectdb} className="bg-green-500 p-3 font-semibold text-white rounded-full md:w-auto mt-10  w-full ml-auto">Connect</button>:<></>}
                 </div>
         </div>
     )

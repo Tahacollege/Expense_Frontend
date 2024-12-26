@@ -1,7 +1,8 @@
 import axios from 'axios'
 import { API_URL,InsertCreditData,UpdateCredit,GetCreditData,GetCreditDatabyid,DeleteCreditDatabyid,GetCreditDatabydate,
     InsertDebitData,GetDebitData,GetDebitDataById,UpdateDebit,DeleteDebitDatabyid,GetDebitDatabydate,
-    InsertRollData,GetRollData,GetRollDataById,UpdateRoll,DeleteRollDatabyid,GetRollDatabydate
+    InsertRollData,GetRollData,GetRollDataById,UpdateRoll,DeleteRollDatabyid,GetRollDatabydate,
+    ConnectDatabase
     
  } from './NwConfig'
 export const Insertdata=async(form)=>{
@@ -295,3 +296,17 @@ export const Delete_Roll_data_By_Id=async(id)=>{
 
 }
 
+export const EstablishConnection=async(form)=>{
+    try{
+        let url=API_URL+ConnectDatabase
+        
+            const request=await axios.get(url)
+            const response=await request.data;
+           
+            return response
+        }
+        catch(error){
+            console.log('error occured : ',error.message)
+            return error.message
+        }
+}
