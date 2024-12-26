@@ -37,6 +37,8 @@ function Header(){
             <button className="font-bold text-sm md:text-2xl mx-auto hover:underline" onClick={()=>redirect(2)}>Debit</button>
             <button className="font-bold text-sm md:text-2xl mx-auto hover:underline" onClick={()=>redirect(3)}>Roll</button>
             <button className="font-bold text-sm md:text-2xl mx-auto hover:underline" onClick={()=>redirect(4)}>Previous-Transactions</button>
+
+        
         </div>
     )
 }

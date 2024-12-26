@@ -1,5 +1,5 @@
-export const API_URL="https://expense-backed.onrender.com"
-// export const API_URL="http://localhost:3000"
+// export const API_URL="https://expense-backed.onrender.com"
+export const API_URL="http://localhost:3000"
 export const InsertCreditData="/api/credit/insertcredit"
 export const GetCreditData="/api/credit/getcredit"
 export const GetCreditDatabyid="/api/credit/getcreditbyid/"
