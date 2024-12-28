@@ -6,7 +6,8 @@ import { Insertdata,Get_Credit_data_By_Id,updateCreditdata,Delete_Credit_data_By
 import "react-toastify/dist/ReactToastify.css";
 import { toast, ToastContainer } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
-
+import { FaPencil } from "react-icons/fa6";
+import { MdDelete } from "react-icons/md";
 function Credit(){
   const navigate=useNavigate()
   var date = new DateObject();
@@ -148,8 +149,12 @@ function Credit(){
                 <td className="p-1 text-lg  md:p-5 text-center border-b-4 border-slate-600">{formatDate(item.createdAt)}</td>
                 <td className="border-b-4 border-slate-600">
                   <div className="block md:flex items-center space-y-2 p-0.5 justify-center gap-3">
-                  <button className="bg-green-500 p-1 md:p-2 min-w-20 font-semibold text-white rounded-lg" onClick={()=>editobj(item._id)}>Edit</button>
-                  <button className="bg-red-500 p-1 md:p-2 min-w-20 font-semibold text-white rounded-lg" onClick={()=>deleteobj(item._id)}>Delete</button>
+                  <button  onClick={()=>editobj(item._id)}>
+                    <FaPencil className="bg-green-500 p-2 w-10 h-10 font-semibold text-white rounded-lg"/>
+                  </button>
+                  <button  onClick={()=>deleteobj(item._id)}>
+                    <MdDelete className="bg-red-500 p-2 w-10 h-10 font-semibold text-white rounded-lg"/>
+                  </button>
                   </div>
                 </td>
                 </tr>

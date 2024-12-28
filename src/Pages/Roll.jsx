@@ -6,7 +6,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { Rolldata,Get_Roll_data_By_Date,Get_ROll_InfoByDateAndPrice,Get_ROll_Info,Get_Roll_data_By_Id,updateRolldata,Delete_Roll_data_By_Id, } from "../utils/Helper";
 import { toast, ToastContainer } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
-import { GetCreditDatabydate, GetRollsinfoDatabydate } from "../utils/NwConfig";
+import { FaPencil } from "react-icons/fa6";
+import { MdDelete } from "react-icons/md";
 function Roll(){
   var d=0
   var q=0
@@ -151,6 +152,7 @@ function Roll(){
         return q
       
     }
+    const arrow='------>'
     return(
         <div className="p-0 md:p-10">
           <ToastContainer />
@@ -176,22 +178,22 @@ function Roll(){
                                 </dialog>
                 <h1 className="text-center font-semibold text-2xl mt-5">{date.format("dddd DD MMMM YYYY")}</h1>
                 <h1 className="text-center font-semibold text-2xl mt-5">Rolls Transactions</h1>
-                <div className="flex w-full gap-5 mt-10">
-                  <select className="border-2 w-1/2 h-10 md:h-20 text-center text-xl md:text-3xl" name="crdate" onChange={rollinfoshow}>
+                <div className="flex w-full gap-5 p-3 mt-10">
+                  <select className="border-2 font-bold w-full h-10 md:h-20 text-center text-xl md:text-3xl" name="crdate" onChange={rollinfoshow}>
                     {rolldatainfo.map((item,index)=>{
                       return (
-                        <option  value={item.createdAt}>₹ {item.amount}</option>
+                        <option className=""  value={item.createdAt}>₹ {item.amount} {arrow} {formatDate2(item.createdAt)}</option>
                       )
                     })}
                   </select>
 
-                  <select className="border-2 w-1/2 h-10 md:h-20 text-center text-xl md:text-3xl" name="crdate" onChange={rollinfoshow}>
+                  {/* <select className="border-2 w-1/2 h-10 md:h-20 text-center text-xl md:text-3xl" name="crdate" onChange={rollinfoshow}>
                     {rolldatainfo.map((item,index)=>{
                       return (
                         <option  value={item.createdAt}>{formatDate2(item.createdAt)}</option>
                       )
                     })}
-                  </select>
+                  </select> */}
                   </div>
                 <div className="mt-10">
                 {showPrevdata?<table className="w-full ">
@@ -240,8 +242,12 @@ function Roll(){
                 <td className="p-1 md:p-5 text-center border-b-4 border-slate-600">{formatDate(item.createdAt)}</td>
                 <td className="border-b-4 border-slate-600">
                   <div className="flex items-center  justify-center gap-3">
-                  <button className="bg-green-500 p-2 min-w-20 font-semibold text-white rounded-lg" onClick={()=>editobj(item._id)}>Edit</button>
-                  <button className="bg-red-500 p-2 min-w-20 font-semibold text-white rounded-lg" onClick={()=>deleteobj(item._id)}>Delete</button>
+                  <button className="" onClick={()=>editobj(item._id)}>
+                    <FaPencil className="bg-green-500 p-2 w-10 h-10 font-semibold text-white rounded-lg"/>
+                  </button>
+                  <button className="" onClick={()=>deleteobj(item._id)}>
+                    <MdDelete className="bg-red-500 p-2 w-10 h-10 font-semibold text-white rounded-lg"/>
+                  </button>
                   </div>
                 </td>
                 </tr>

@@ -6,6 +6,8 @@ import { Debitdata,Get_Debit_data_By_Id,updateDebitdata,Delete_Debit_data_By_Id,
 import "react-toastify/dist/ReactToastify.css";
 import { toast, ToastContainer } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
+import { FaPencil } from "react-icons/fa6";
+import { MdDelete } from "react-icons/md";
 function Debit(){
   const navigate=useNavigate()
   var date = new DateObject();
@@ -147,8 +149,12 @@ function Debit(){
                 <td className="p-1 md:p-5 text-center border-b-4 border-slate-600">{formatDate(item.createdAt)}</td>
                 <td className="border-b-4 border-slate-600">
                   <div className="flex items-center  justify-center gap-3">
-                  <button className="bg-green-500 p-2 min-w-20 font-semibold text-white rounded-lg" onClick={()=>editobj(item._id)}>Edit</button>
-                  <button className="bg-red-500 p-2 min-w-20 font-semibold text-white rounded-lg" onClick={()=>deleteobj(item._id)}>Delete</button>
+                  <button  onClick={()=>editobj(item._id)}>
+                  <FaPencil className="bg-green-500 p-2 w-10 h-10 font-semibold text-white rounded-lg"/>
+                  </button>
+                  <button  onClick={()=>deleteobj(item._id)}>
+                  <MdDelete className="bg-red-500 p-2 w-10 h-10 font-semibold text-white rounded-lg"/>
+                  </button>
                   </div>
                 </td>
                 </tr>
