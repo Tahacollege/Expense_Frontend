@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { API_URL,InsertCreditData,UpdateCredit,GetCreditData,GetCreditDatabyid,DeleteCreditDatabyid,GetCreditDatabydate,
     InsertDebitData,GetDebitData,GetDebitDataById,UpdateDebit,DeleteDebitDatabyid,GetDebitDatabydate,
-    InsertRollData,GetRollData,GetRollDataById,UpdateRoll,DeleteRollDatabyid,GetRollDatabydate,
+    InsertRollData,GetRollData,GetRollDataById,UpdateRoll,DeleteRollDatabyid,GetRollDatabydate,RollData,GetRollsinfoDatabydate,
     ConnectDatabase
     
  } from './NwConfig'
@@ -284,6 +284,37 @@ export const Delete_Roll_data_By_Id=async(id)=>{
         let url=API_URL+DeleteRollDatabyid+id
         
             const request=await axios.delete(url)
+            const response=await request.data;
+            
+            return response
+        }
+        catch(error){
+            console.log('error occured : ',error.message)
+            return error.message
+        }
+}
+
+export const Get_ROll_Info=async()=>{
+    try{
+        let url=API_URL+RollData
+        
+            const request=await axios.get(url)
+            const response=await request.data;
+            
+            return response
+        }
+        catch(error){
+            console.log('error occured : ',error.message)
+            return error.message
+        }
+
+
+}
+
+export const Get_ROll_InfoByDateAndPrice=async(date)=>{
+    try{
+        let url=API_URL+GetRollsinfoDatabydate+date
+            const request=await axios.get(url)
             const response=await request.data;
             
             return response

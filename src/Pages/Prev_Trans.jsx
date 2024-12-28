@@ -2,13 +2,12 @@ import axios from "axios"
 import { useState,useEffect } from "react";
 import DateObject from "react-date-object";
 import { Get_Credit_data_By_Date,Get_Debit_data_By_Date,Get_Roll_data_By_Date } from "../utils/Helper";
-
+import { toast, ToastContainer } from 'react-toastify';
 function Prev_Trans(){
   var d=0
   const [dates,setDate]=useState([])
   const [sdata,setData]=useState([])
-  const [selectedDates, setSelectedDates] = useState({}); 
-
+  const [showspin,setShowSpin]=useState(false)
   function getMonthsOfYear() {
     const months = [];
     const now = new Date(); // Get the current date
@@ -92,12 +91,10 @@ if('debit' in item){
     
   }
   
-useEffect(()=>{
-  // getDatesOfYear()
-  // DatesDropdown()
-},[])
+
 
   const handelSubmit=async(e)=>{
+    setShowSpin(true)
     e.preventDefault()
     var setdate=e.target.value
     console.log(setdate)
@@ -106,6 +103,16 @@ useEffect(()=>{
       const rdata=await Get_Roll_data_By_Date(setdate)
       
       const log=[...cdata,...rdata,...ddata,]
+      console.log(log.length)
+      if(log.length==0 ){
+        toast.error(`No Record Found`, {
+          position: "top-center"
+        });
+        setShowSpin(false)
+      }
+      else{
+        setShowSpin(false)
+      }
       setData(log);
   }
   var date = new DateObject();
@@ -114,6 +121,8 @@ useEffect(()=>{
     
     return(
         <div className="p-1 md:p-10">
+          <ToastContainer/>
+
                 <h1 className="text-center font-semibold text-2xl mt-5">{date.format("dddd DD MMMM YYYY")}</h1>
                 <h1 className="text-center font-semibold text-2xl mt-5">Previous Transactions</h1>
                 <form className="mt-10" >
@@ -134,7 +143,9 @@ useEffect(()=>{
                     })}
                   </select>
                   </div>
-
+                  {showspin ?<div className="flex items-center justify-center  ">
+      <div className="w-16 h-16 border-4 mt-10  border-blue-500 border-dashed rounded-full animate-spin"></div>
+    </div>:<></>}
                   <table className="w-full mt-10">
             <thead className="bg-[#3F5D97] text-white">
               <th className="p-1 md:p-5">Title</th>
@@ -143,6 +154,7 @@ useEffect(()=>{
               <th className="p-1 md:p-5">Time</th>
               <th className="p-1 md:p-5">Total-Amount</th>
             </thead>
+            
             <tbody>
               {
                 sdata.map((item,index)=>{

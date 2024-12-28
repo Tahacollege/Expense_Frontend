@@ -9,7 +9,7 @@ function Home(){
   var date = new DateObject();
     const tdate=date.format('YYYY-MM-DD')
     
-    const [total,setTotal]=useState(0)
+    const [showspin,setShowSpin]=useState(false)
   const [sdata,setData]=useState([])
   const [show,setShow]=useState(true)
   useEffect(()=>{
@@ -61,13 +61,17 @@ function Home(){
       
     }
     const connectdb=async()=>{
+      setShowSpin(true)
       const mssg=await EstablishConnection()
       if(mssg=='Database connected Successfully'){
-        alert('Database Connected ')
+        toast.success(`DataBase Connected`, {
+          position: "top-center"
+        });
         setShow(false)
+        setShowSpin(false)
       }
       else{
-        alert('Try Again')
+        setShowSpin(true)
         setShow(true)
       }
     }
@@ -75,7 +79,9 @@ function Home(){
         <div className="p-1 md:p-10">
           <ToastContainer/>
           <h1 className="text-center font-semibold text-2xl mt-5">{date.format("dddd DD MMMM YYYY")}</h1>
-          
+          {showspin ?<div className="flex items-center justify-center ">
+      <div className="w-16 h-16 border-4 border-blue-500 border-dashed rounded-full animate-spin"></div>
+    </div>:<></>}
                 <div className="mt-10">
                 <table className="w-full ">
             <thead className="bg-[#3F5D97] text-white">
