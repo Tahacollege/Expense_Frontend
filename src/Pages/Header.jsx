@@ -1,5 +1,6 @@
 // import logo from "../assets/burhani_logo.jpg"
 import logo from "../assets/burhani_logo_tr.png"
+import logo2 from "../assets/burhani_logo_tr2.png"
 import { useNavigate } from "react-router-dom"
 
 function Header(){
@@ -31,8 +32,13 @@ function Header(){
         <div className="bg-slate-200 w-full h-24 flex ">
             <img 
             onClick={()=>redirect(0)}
-            className="mx-auto w-28 h-full mix-blend-multiply cursor-pointer"
+            className="mx-auto md:block hidden w-28 h-full mix-blend-multiply cursor-pointer"
             src={logo}
+            />
+            <img 
+            onClick={()=>redirect(0)}
+            className="mx-auto md:hidden block w-28 h-full mix-blend-multiply cursor-pointer"
+            src={logo2}
             />
             <button className="font-bold text-sm md:text-2xl mx-auto hover:underline" onClick={()=>redirect(1)}>Credit</button>
             <button className="font-bold text-sm md:text-2xl mx-auto hover:underline" onClick={()=>redirect(2)}>Debit</button>
