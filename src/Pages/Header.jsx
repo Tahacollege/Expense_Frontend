@@ -1,4 +1,5 @@
-import logo from "../assets/burhani_logo.jpg"
+// import logo from "../assets/burhani_logo.jpg"
+import logo from "../assets/burhani_logo_tr.png"
 import { useNavigate } from "react-router-dom"
 
 function Header(){
