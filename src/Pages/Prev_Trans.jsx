@@ -26,9 +26,10 @@ const months = getMonthsOfYear();
 const selectedMonth=async(e)=>{
   e.preventDefault()
   var setMonth=e.target.value
+  var setYear=window.localStorage.getItem('selectedYear')
   try {
-    const selectedMonth = setMonth; // Replace with user-selected month
-    const dates = getDatesForMonth(selectedMonth);
+    const selectedMonth = setMonth; 
+    const dates = getDatesForMonth(selectedMonth,setYear);
     setDate(dates)
     console.log(`Dates for ${selectedMonth}:`, dates);
 } catch (error) {
@@ -36,28 +37,41 @@ const selectedMonth=async(e)=>{
 }
 
 }
-function getDatesForMonth(selectedMonth) {
-  const now = new Date();
-  const year = now.getFullYear(); // Current year
+const selectedYear=async(e)=>{
+  e.preventDefault()
+  var setYear=e.target.value
+  window.localStorage.setItem('selectedYear',setYear)
+
+}
+function getYearForDates(){
+  const currentYear = new Date().getFullYear();
+  const year=[]
+        for (let i = currentYear - 1; i <= currentYear + 10; i++) {
+          year.push(i) 
+        }
+        return year
+}
+const years=getYearForDates()
+function getDatesForMonth(selectedMonth,selectedYear) {
   const months = [
-      "January", "February", "March", "April", "May", "June",
-      "July", "August", "September", "October", "November", "December"
-  ];
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+];
 
-  const monthIndex = months.indexOf(selectedMonth); // Find the index of the selected month
+const monthIndex = months.indexOf(selectedMonth); // Find the index of the selected month
 
-  if (monthIndex === -1) {
-      throw new Error("Invalid month name. Please provide a valid month.");
-  }
+if (monthIndex === -1) {
+    throw new Error("Invalid month name. Please provide a valid month.");
+}
 
-  const dates = [];
-  const daysInMonth = new Date(year, monthIndex + 1, 0).getDate(); // Number of days in the month
+const dates = [];
+const daysInMonth = new Date(selectedYear, monthIndex + 1, 0).getDate(); // Number of days in the month
 
-  for (let day = 1; day <= daysInMonth; day++) {
-      dates.push(new Date(year, monthIndex, day).toISOString().split('T')[0]); // Format as YYYY-MM-DD
-  }
+for (let day = 1; day <= daysInMonth; day++) {
+    dates.push(new Date(selectedYear, monthIndex, day).toISOString().split('T')[0]); // Format as YYYY-MM-DD
+}
 
-  return dates;
+return dates;
 }
 
 
@@ -127,6 +141,14 @@ if('debit' in item){
                 <h1 className="text-center font-semibold text-2xl mt-5">Previous Transactions</h1>
                 <form className="mt-10" >
                   <div className="flex w-full gap-5">
+                  <select className="border-2 w-1/2 h-10 md:h-20 text-center text-xl md:text-3xl" name="crdate" onChange={selectedYear}>
+                    {years.map((item,index)=>{
+                      return (
+                        <option  value={item}>{item}</option>
+                      )
+                    })}
+                  </select>
+
                   <select className="border-2 w-1/2 h-10 md:h-20 text-center text-xl md:text-3xl" name="crdate" onChange={selectedMonth}>
                     {months.map((item,index)=>{
                       return (
